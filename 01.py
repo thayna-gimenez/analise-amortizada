@@ -37,7 +37,7 @@ class Stack:
 
             self.call_copy()
     
-    # Verifica se previsa fazer a cópia após cada operação
+    # Verifica se precisa fazer a cópia após cada operação
     def call_copy(self):
         self.op_count += 1
         
@@ -56,22 +56,24 @@ class Stack:
         return self.real_cost / self.op_count
     
 
-k = 10
+k = 20
 ops = 1000
-stack = Stack(k)
 
-for _ in range(ops):
-    operation = random.choice(['push', 'pop'])
+for i in range(3):
+    print(f"Teste {i+1} ---------------------------------")
+    stack = Stack(k)
     
-    if operation == 'push':
-        stack.push(random.randint(1, 100))
-    else:
-        stack.pop()
+    for _ in range(ops):
+        operation = random.choice(['push', 'pop'])
+        
+        if operation == 'push':
+            stack.push(random.randint(1, 100))
+        else:
+            stack.pop()
 
-
-print(f"Total Push: {stack.push_count}")
-print(f"Total Pop: {stack.pop_count}")
-print(f"Total Copy: {stack.copy_count}")
-print(f"Custo Real Total: {stack.real_cost}")
-print(f"Custo Amortizado por Operação: {stack.amortized_cost():.2f}")
+    print(f"Total Push: {stack.push_count}")
+    print(f"Total Pop: {stack.pop_count}")
+    print(f"Total Copy: {stack.copy_count}")
+    print(f"Custo Real Total: {stack.real_cost}")
+    print(f"Custo Amortizado por Operação: {stack.amortized_cost():.2f}")
 
