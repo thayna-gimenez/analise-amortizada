@@ -10,27 +10,19 @@ class BinaryCounter:
         self.counter = [0] * size # Inicializa o contador com zeros
         self.size = size          # Tamanho do contador (número de bits)
         self.highbit = -1         # Índice do bit 1 mais significativo (lembrando que o counter está ao contrário)
-        self.real_cost = 0        # Custo real das operações para análise amortizada
-        self.op_count = 0         # Contador de operações para análise amortizada
 
     def increment(self):
         i = 0
         while i < self.size and self.counter[i] == 1:
             self.counter[i] = 0
-            self.real_cost += 1
-            self.op_count += 1
             i += 1
         if i < self.size:
             self.counter[i] = 1
-            self.real_cost += 1
-            self.op_count += 1
             self.highbit = max(self.highbit, i)
     
     def reset(self):
         for i in range(self.highbit+1):
             self.counter[i] = 0
-            self.real_cost += 1
-            self.op_count += 1
         self.highbit = -1
 
     def counter_display(self):
@@ -49,7 +41,3 @@ for i in range(n):
         print(f"Contador após reset: {counter.counter_display()}")
         break
     print(f"Contador após incremento {i+1}: {counter.counter_display()}")
-
-print(f"Custo real: {counter.real_cost}")
-print(f"Número total de operações: {counter.op_count}")
-print(f"Custo amortizado por operação: {counter.real_cost / counter.op_count:.2f}")
